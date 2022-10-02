@@ -1,11 +1,31 @@
 const express = require('express')
 const app = express()
+const upload = require("express-fileupload")
+
 const port = 3000
 
+app.use(upload())
+
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.sendFile(__dirname + "/index.html")
+})
+
+app.post("/", (req, res) => {
+    if(req.files){
+        let file = req.files.file
+        let filename = file.name
+
+        file.mv("./uploads/" + filename, function (err) {
+            if(err){
+                res.send(err)
+            }else{
+                res.send("File uploaded.")
+            }
+        })
+    }
 })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
