@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const upload = require("express-fileupload")
+var ip = require("ip");
 
 const port = 3000
 
@@ -25,7 +26,7 @@ app.post("/", (req, res) => {
     }
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(port, ip.address(), () => {
+  console.log(`Example app listening on ${ip.address()}:${port}`)
 })
 
