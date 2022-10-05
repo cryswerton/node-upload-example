@@ -9,14 +9,14 @@ const port = 3000
 app.set("view engine", "ejs")
 
 app.get("/download/:filename", (req, res) => {
-    const folder = './uploads/';
-    fs.readdir(folder, (err, files) => {
-        files.forEach(file => {
-            console.log(file);
-        });
-        file_download = `${__dirname}/uploads/${req.params.filename}`
-        res.download(file_download);
-    });
+    file_download = `${__dirname}/uploads/${req.params.filename}`
+    res.download(file_download);
+})
+
+app.get("/delete/:filename", (req, res) => {
+    file_delete = `${__dirname}/uploads/${req.params.filename}`
+    fs.unlinkSync(file_delete);
+    res.redirect('/');
 })
 
 app.use(upload())
