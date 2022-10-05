@@ -36,6 +36,11 @@ app.get('/', (req, res) => {
     });  
 })
 
+app.get('/upload', (req, res) => {
+    //res.sendFile(__dirname + "/index.html")
+    res.render("upload") 
+  })
+
 app.post("/", (req, res) => {
     if(req.files){
         let file = req.files.file
@@ -45,7 +50,7 @@ app.post("/", (req, res) => {
             if(err){
                 res.send(err)
             }else{
-                res.send("File uploaded.")
+                res.redirect('/');
             }
         })
     }else{
