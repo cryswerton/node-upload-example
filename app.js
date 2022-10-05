@@ -48,6 +48,8 @@ app.post("/", (req, res) => {
                 res.send("File uploaded.")
             }
         })
+    }else{
+        res.redirect('/');
     }
 })
 
