@@ -1,14 +1,39 @@
 const express = require('express')
 const app = express()
 const upload = require("express-fileupload")
+const fs = require('fs');
 var ip = require("ip");
 
 const port = 3000
 
+app.set("view engine", "ejs")
+
+app.get("/download/:filename", (req, res) => {
+    const folder = './uploads/';
+    fs.readdir(folder, (err, files) => {
+        files.forEach(file => {
+            console.log(file);
+        });
+        file_download = `${__dirname}/uploads/${req.params.filename}`
+        res.download(file_download);
+    });
+})
+
 app.use(upload())
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + "/index.html")
+  //res.sendFile(__dirname + "/index.html")
+    const folder = './uploads/';
+
+    fs.readdir(folder, (err, files) => {
+        files.forEach(file => {
+            console.log(file);
+        });
+        const id = files.indexOf('.gitignore'); // 2
+        const removedFile = files.splice(id,  1);
+        console.log("removed: " + removedFile)
+        res.render("index", { files: files})
+    });  
 })
 
 app.post("/", (req, res) => {
