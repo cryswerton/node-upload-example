@@ -8,11 +8,16 @@
 </head>
 <body class="container">
     <h1>Home</h1>
-    <% files.forEach( function(item){ %>
-        <div>
-            <a href="/download/<%= item %>"><%= item %></a> <button onclick="window.location.href='/delete/<%= item %>'">X</button>
-        </div> 
-    <% }) %>
+    <hr>
+    <% if( files.length > 0 ){ %>
+        <% files.forEach( function(item){ %>
+            <div>
+                <a href="/download/<%= item %>"><%= item %></a> <button onclick="window.location.href='/delete/<%= item %>'">X</button>
+            </div> 
+        <% }) %>
+    <% }else{ %>
+        <p>No uploads yet.</p>
+    <% } %> 
     <hr>
     <nav>
         <a href="/">Home</a>
