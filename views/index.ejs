@@ -30,6 +30,7 @@
             <a href="/">Home</a>
             <a href="/upload">Upload</a>
         </nav>
+        <br>
         <% if( files.length > 0 ){ %>
             <% files.forEach( function(item){ %>
                 <a href="/download/<%= item %>"><%= item %></a> <button onclick="window.location.href='/delete/<%= item %>'">X</button> 
