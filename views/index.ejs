@@ -34,13 +34,14 @@
         <% if( files.length > 0 ){ %>
             <% files.forEach( function(item){ %>
                 <div>
-                    <a href="/download/<%= item %>"><%= item %></a> 
-                    <br>
+                    <div><%= item %></div>                     
                     <button onclick="window.location.href='/delete/<%= item %>'">X</button>
                     <% if( item.split('.').pop() == "mp4"){ %>
                     <button onclick="window.location.href='/watch/<%= item %>'">Watch</button>
                     <% } %>
+                    <button onclick="window.location.href='/download/<%= item %>'">Download</button>
                 </div> 
+                <br>
             <% }) %>
         <% }else{ %>
             <p>No uploads yet.</p>
