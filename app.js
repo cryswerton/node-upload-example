@@ -6,6 +6,8 @@ var ip = require("ip");
 
 const port = 3000
 
+app.use(express.static('public'))
+
 app.set("view engine", "ejs")
 
 app.get("/download/:filename", (req, res) => {
@@ -17,6 +19,10 @@ app.get("/delete/:filename", (req, res) => {
     file_delete = `${__dirname}/public/uploads/${req.params.filename}`
     fs.unlinkSync(file_delete);
     res.redirect('/');
+})
+
+app.get("/watch/:filename", (req, res) => {
+    res.render("watch", { file: req.params.filename})
 })
 
 app.use(upload())
