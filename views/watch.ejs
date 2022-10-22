@@ -15,7 +15,7 @@
 
         .content{
             width: 300px;
-            height: 300px;
+            height: fit-content;
             border: 1px solid black;
             border-radius: 3px;
             padding: 10px 40px;
@@ -32,6 +32,7 @@
         </nav>
         <br>
         <div>
+            <h3><%= file %></h3>
             <video width="100%" controls>
                 <source src="/uploads/<%= file %>" type="video/<%= file.split('.').pop() %>">
                 Your browser does not support the video tag.
