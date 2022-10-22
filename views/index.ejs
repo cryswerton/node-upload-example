@@ -48,9 +48,10 @@
         <% } %> 
     </div>
     <script>
-        const deleteFile = (file) => {
-            console.log(file)
-            window.location.href="/delete/" + file
+        const deleteFile = (file) => {            
+            if (confirm("Are you sure you want to delete this file?") == true) {
+                window.location.href="/delete/" + file
+            }
         }
     </script>
 </body>
