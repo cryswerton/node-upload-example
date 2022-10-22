@@ -32,14 +32,14 @@
         </nav>
         <br>
         <% if( files.length > 0 ){ %>
-            <% files.forEach( function(item){ %>
+            <% files.forEach( function(file){ %>
                 <div>
-                    <div><%= item %></div>                     
-                    <button onclick="window.location.href='/delete/<%= item %>'">X</button>
-                    <% if( item.split('.').pop() == "mp4"){ %>
-                    <button onclick="window.location.href='/watch/<%= item %>'">Watch</button>
+                    <div><%= file %></div>                     
+                    <button onclick="deleteFile(<%= JSON.stringify(file) %>)">Delete</button>
+                    <% if( file.split('.').pop() == "mp4"){ %>
+                    <button onclick="window.location.href='/watch/<%= file %>'">Watch</button>
                     <% } %>
-                    <button onclick="window.location.href='/download/<%= item %>'">Download</button>
+                    <button onclick="window.location.href='/download/<%= file %>'">Download</button>
                 </div> 
                 <br>
             <% }) %>
@@ -47,5 +47,11 @@
             <p>No uploads yet.</p>
         <% } %> 
     </div>
+    <script>
+        const deleteFile = (file) => {
+            console.log(file)
+            window.location.href="/delete/" + file
+        }
+    </script>
 </body>
 </html>
