@@ -7,6 +7,7 @@ var ip = require("ip");
 const port = 3000
 
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 app.set("view engine", "ejs")
 
@@ -68,7 +69,7 @@ app.post("/", (req, res) => {
     if(req.files){
         let file = req.files.file
         let filename = file.name
-
+        
         file.mv("./public/uploads/" + filename, function (err) {
             if(err){
                 res.send(err)
@@ -76,8 +77,33 @@ app.post("/", (req, res) => {
                 res.redirect('/');
             }
         })
+        
     }else{
         res.redirect('/');
+    }
+})
+
+app.post("/subtitle/upload", (req, res) => {
+    if(req.files){
+        let file = req.files.file
+        let filename = file.name
+        let new_filename = req.body.video.substr(0, req.body.video.lastIndexOf(".")) + ".vtt"
+        console.log(filename.split('.').pop())
+
+        if(filename.split('.').pop() == "vtt"){
+            file.mv("./public/uploads/subtitles/" + filename, function (err) {
+                if(err){
+                    res.send(err)
+                }else{
+                    res.redirect('/watch/' + req.body.video);
+                }
+            })
+        }else{
+            res.redirect('/watch/' + req.body.video);
+        }
+        
+    }else{
+        res.redirect('/watch/' + req.body.video);
     }
 })
 

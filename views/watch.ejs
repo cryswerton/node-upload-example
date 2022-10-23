@@ -38,7 +38,13 @@
                 <br>
                 <br>
             <% }else{ %>
-                <p>There is no subtitle for this video.</p>                
+                <p>There is no subtitle for this video. But you can make an upload below:</p>  
+                <form action="/subtitle/upload" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="video" name="video" value="<%= file %>">
+                    <input type="file" name="file">
+                    <input type="submit" value="Upload">
+                </form>
+                <br>              
             <% } %>
             <video width="100%" controls>
                 <source src="/uploads/<%= file %>" type="video/<%= file.split('.').pop() %>">
