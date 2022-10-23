@@ -32,8 +32,6 @@ app.get("/watch/:filename", (req, res) => {
 
         const expected_subtitle = req.params.filename.substr(0, req.params.filename.lastIndexOf(".")) + ".vtt"
 
-        console.log(files.indexOf(expected_subtitle))
-
         if(files.indexOf(expected_subtitle) !== -1){
             subtitle = expected_subtitle
         }
