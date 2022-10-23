@@ -22,7 +22,23 @@ app.get("/delete/:filename", (req, res) => {
 })
 
 app.get("/watch/:filename", (req, res) => {
-    res.render("watch", { file: req.params.filename})
+    subtitle = false
+
+    const folder = './public/uploads/subtitles';
+
+    fs.readdir(folder, (err, files) => {
+        let id = files.indexOf('.gitignore'); // 2
+        const removedFile = files.splice(id,  1);
+
+        const expected_subtitle = req.params.filename.substr(0, req.params.filename.lastIndexOf(".")) + ".vtt"
+
+        console.log(files.indexOf(expected_subtitle))
+
+        if(files.indexOf(expected_subtitle) !== -1){
+            subtitle = expected_subtitle
+        }
+        res.render("watch", { file: req.params.filename, subtitle: subtitle})
+    });
 })
 
 app.use(upload())
@@ -35,9 +51,12 @@ app.get('/', (req, res) => {
         files.forEach(file => {
             console.log(file);
         });
-        const id = files.indexOf('.gitignore'); // 2
-        const removedFile = files.splice(id,  1);
-        console.log("removed: " + removedFile)
+        let id = files.indexOf('.gitignore');
+        files.splice(id,  1);
+
+        id = files.indexOf('subtitles');
+        files.splice(id,  1);
+        
         res.render("index", { files: files})
     });  
 })

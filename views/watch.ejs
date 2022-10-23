@@ -31,11 +31,26 @@
             <a href="/upload">Upload</a>
         </nav>
         <br>
-        <div>
+        <div>            
             <h3><%= file %></h3>
+            <% if(subtitle){ %>
+                <strong>Current subtitle:</strong> <br> <%= subtitle %>
+                <br>
+                <br>
+            <% }else{ %>
+                <p>There is no subtitle for this video.</p>                
+            <% } %>
             <video width="100%" controls>
                 <source src="/uploads/<%= file %>" type="video/<%= file.split('.').pop() %>">
                 Your browser does not support the video tag.
+                <% if(subtitle){ %>
+                    <track
+                        label="English"
+                        kind="subtitles"
+                        srclang="en"
+                        src="/uploads/subtitles/<%= subtitle %>"
+                        default />
+                <% } %>
               </video>
         </div>
     </div>
