@@ -91,7 +91,7 @@ app.post("/subtitle/upload", (req, res) => {
         console.log(filename.split('.').pop())
 
         if(filename.split('.').pop() == "vtt"){
-            file.mv("./public/uploads/subtitles/" + filename, function (err) {
+            file.mv("./public/uploads/subtitles/" + new_filename, function (err) {
                 if(err){
                     res.send(err)
                 }else{
