@@ -47,9 +47,6 @@ app.get('/', (req, res) => {
     const folder = './public/uploads/';
 
     fs.readdir(folder, (err, files) => {
-        files.forEach(file => {
-            console.log(file);
-        });
         let id = files.indexOf('.gitignore');
         files.splice(id,  1);
 
@@ -88,7 +85,6 @@ app.post("/subtitle/upload", (req, res) => {
         let file = req.files.file
         let filename = file.name
         let new_filename = req.body.video.substr(0, req.body.video.lastIndexOf(".")) + ".vtt"
-        console.log(filename.split('.').pop())
 
         if(filename.split('.').pop() == "vtt"){
             file.mv("./public/uploads/subtitles/" + new_filename, function (err) {
